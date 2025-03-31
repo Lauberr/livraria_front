@@ -1,1 +1,2 @@
-# Livraria_PI
+# Livraria UTFPR 
+Diciplina: Projeto Integrador
