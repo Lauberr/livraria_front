@@ -1,4 +1,17 @@
-DROP TABLE IF EXISTS editora_info, editora
+DROP TABLE IF EXISTS livro
+DROP TABLE IF EXISTS autores
+DROP TABLE IF EXISTS autor_livro
+DROP TABLE IF EXISTS editora
+DROP TABLE IF EXISTS editora_livro
+DROP TABLE IF EXISTS categoria
+DROP TABLE IF EXISTS arvore_categoria
+DROP TABLE IF EXISTS categoria_livro
+DROP TABLE IF EXISTS locatario
+DROP TABLE IF EXISTS curso
+DROP TABLE IF EXISTS emprestimo
+DROP TABLE IF EXISTS dividas
+
+DROP TABLE IF EXISTS  aluno, professor, bibliotecario
 
 -- =============================================================
 --                            LIVROS
@@ -67,35 +80,22 @@ CREATE TABLE categoria_livro(
 --                          LOCATARIO
 -- =============================================================
 
+CREATE TABLE cargo(
+	id_cargo INT UNIQUE PRIMARY KEY,
+	descricao VARCHAR(100),
+	qt_livro INT
+);
 
-CREATE TABLE locatario (
-	id_locatario SERIAL,
-	tipo_locatario INT,
+CREATE TABLE locatario(
+	id_locatario SERIAL PRIMARY KEY,
+	registro_academico VARCHAR(7),
 	nome_locatario VARCHAR(100) NOT NULL,
 	data_nascimento DATE,
 	email VARCHAR(255),
 	telefone VARCHAR(30),
-	PRIMARY KEY(id_locatario)
-);
-
--- ---------------------------TIPOS----------------------------
-
-CREATE TABLE aluno(
-	id_tipo INT UNIQUE PRIMARY KEY,
-	registro_acad INT
-);
-	
-
-CREATE TABLE professor(
-	id_tipo INT UNIQUE PRIMARY KEY,
-	registro_acad INT
-);
-
-
-CREATE TABLE bibliotecario(
-	id_tipo INT UNIQUE PRIMARY KEY,
-	login 
-	senha
+	login VARCHAR(100),
+	senha VARCHAR(100)
+	id_cargo INT FOREIGN KEY REFERENCES cargo(id_cargo) ON DELETE CASCADE,
 );
 
 -- ---------------------------CURSO----------------------------
