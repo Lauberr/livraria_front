@@ -13,6 +13,21 @@ DROP TABLE IF EXISTS dividas
 
 DROP TABLE IF EXISTS  aluno, professor, bibliotecario
 
+DROP TABLE IF EXISTS livro
+DROP TABLE IF EXISTS autores
+DROP TABLE IF EXISTS autor_livro
+DROP TABLE IF EXISTS editora
+DROP TABLE IF EXISTS editora_livro
+DROP TABLE IF EXISTS categoria
+DROP TABLE IF EXISTS arvore_categoria
+DROP TABLE IF EXISTS categoria_livro
+DROP TABLE IF EXISTS locatario
+DROP TABLE IF EXISTS curso
+DROP TABLE IF EXISTS emprestimo
+DROP TABLE IF EXISTS dividas
+
+DROP TABLE IF EXISTS  aluno, professor, bibliotecario
+
 -- =============================================================
 --                            LIVROS
 -- =============================================================
@@ -94,8 +109,9 @@ CREATE TABLE locatario(
 	email VARCHAR(255),
 	telefone VARCHAR(30),
 	login VARCHAR(100),
-	senha VARCHAR(100)
-	id_cargo INT FOREIGN KEY REFERENCES cargo(id_cargo) ON DELETE CASCADE,
+	senha VARCHAR(100),
+	id_cargo INT,
+	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo)
 );
 
 -- ---------------------------CURSO----------------------------
