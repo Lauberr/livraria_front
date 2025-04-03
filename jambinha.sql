@@ -3,30 +3,14 @@ DROP TABLE IF EXISTS autores
 DROP TABLE IF EXISTS autor_livro
 DROP TABLE IF EXISTS editora
 DROP TABLE IF EXISTS editora_livro
-DROP TABLE IF EXISTS categoria
 DROP TABLE IF EXISTS arvore_categoria
-DROP TABLE IF EXISTS categoria_livro
-DROP TABLE IF EXISTS locatario
+DROP TABLE IF EXISTS categoria
 DROP TABLE IF EXISTS curso
 DROP TABLE IF EXISTS emprestimo
-DROP TABLE IF EXISTS dividas
-
-DROP TABLE IF EXISTS  aluno, professor, bibliotecario
-
-DROP TABLE IF EXISTS livro
-DROP TABLE IF EXISTS autores
-DROP TABLE IF EXISTS autor_livro
-DROP TABLE IF EXISTS editora
-DROP TABLE IF EXISTS editora_livro
-DROP TABLE IF EXISTS categoria
-DROP TABLE IF EXISTS arvore_categoria
 DROP TABLE IF EXISTS categoria_livro
-DROP TABLE IF EXISTS locatario
-DROP TABLE IF EXISTS curso
-DROP TABLE IF EXISTS emprestimo
 DROP TABLE IF EXISTS dividas
-
-DROP TABLE IF EXISTS  aluno, professor, bibliotecario
+DROP TABLE IF EXISTS cargo
+DROP TABLE IF EXISTS locatario
 
 -- =============================================================
 --                            LIVROS
@@ -34,12 +18,12 @@ DROP TABLE IF EXISTS  aluno, professor, bibliotecario
 
 CREATE TABLE livro(
 	id_livro SERIAL PRIMARY KEY,
-	isbn INT UNIQUE,
+	isbn VARCHAR(50) UNIQUE,
 	titulo VARCHAR(100) NOT NULL,
-	qt_disponivel INT,
+	qt_disponivel INTEGER,
 	genero VARCHAR(100),
 	edicao VARCHAR(100),
-	capa BYTEA
+	capa VARCHAR(300)
 );
 
 -- --------------------------AUTORES---------------------------
@@ -76,10 +60,20 @@ CREATE TABLE categoria(
 	nome_cat VARCHAR(100)
 );
 
+CREATE TABLE subcategoria(
+	id_subcat SERIAL PRIMARY KEY,
+	nome_subcat VARCHAR(100)
+);
 
-CREATE TABLE arvore_categoria(
+-- CREATE TABLE arvore_categoria(
+-- 	id_cat INTEGER REFERENCES categoria(id_cat),
+-- 	id_subcat SERIAL,
+-- 	PRIMARY KEY(id_cat, id_subcat)
+-- );
+
+CREATE TABLE categoria_subcategoria(
 	id_cat INTEGER REFERENCES categoria(id_cat),
-	id_subcat SERIAL,
+	id_subcat INTEGER REFERENCES subcategoria(id_subcat),
 	PRIMARY KEY(id_cat, id_subcat)
 );
 
@@ -96,9 +90,9 @@ CREATE TABLE categoria_livro(
 -- =============================================================
 
 CREATE TABLE cargo(
-	id_cargo INT UNIQUE PRIMARY KEY,
+	id_cargo INTEGER UNIQUE PRIMARY KEY,
 	descricao VARCHAR(100),
-	qt_livro INT
+	qt_livro INTEGER
 );
 
 CREATE TABLE locatario(
@@ -110,7 +104,7 @@ CREATE TABLE locatario(
 	telefone VARCHAR(30),
 	login VARCHAR(100),
 	senha VARCHAR(100),
-	id_cargo INT,
+	id_cargo INTEGER,
 	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo)
 );
 
@@ -126,9 +120,9 @@ CREATE TABLE curso(
 CREATE TABLE emprestimo (
 	id_locatario INTEGER REFERENCES locatario(id_locatario),
 	id_livro INTEGER REFERENCES livro(id_livro),
-	data_hora_reserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	data_hora_emprestimo TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	data_devolucao TIMESTAMP,
-	PRIMARY KEY (id_locatario, id_livro, data_hora_reserva)
+	PRIMARY KEY (id_locatario, id_livro, data_hora_emprestimo)
 );
 
 -- --------------------------DIVIDAS--------------------------
@@ -137,11 +131,11 @@ CREATE TABLE dividas(
 	id_divida SERIAL PRIMARY KEY,
 	id_livro INTEGER,
 	id_locatario INTEGER,
-	data_hora_reserva TIMESTAMP,
+	data_hora_emprestimo TIMESTAMP,
 	valor NUMERIC (15,2) NOT NULL,
 	data_hora_divida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	estado INT CHECK (estado IN (0,1)) NOT NULL,
-	FOREIGN KEY (id_livro, id_locatario, data_hora_reserva)
-	REFERENCES emprestimo(id_livro, id_locatario, data_hora_reserva) ON DELETE CASCADE
+	estado INT CHECK (estado IN (0g,1)) NOT NULL,
+	FOREIGN KEY (id_livro, id_locatario, data_hora_emprestimo)
+	REFERENCES emprestimo(id_livro, id_locatario, data_hora_emprestimo) ON DELETE CASCADE
 );
 
