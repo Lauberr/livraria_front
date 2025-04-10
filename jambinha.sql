@@ -1,16 +1,18 @@
-DROP TABLE IF EXISTS livro
-DROP TABLE IF EXISTS autores
-DROP TABLE IF EXISTS autor_livro
-DROP TABLE IF EXISTS editora
-DROP TABLE IF EXISTS editora_livro
-DROP TABLE IF EXISTS arvore_categoria
-DROP TABLE IF EXISTS categoria
-DROP TABLE IF EXISTS curso
-DROP TABLE IF EXISTS emprestimo
-DROP TABLE IF EXISTS categoria_livro
-DROP TABLE IF EXISTS dividas
-DROP TABLE IF EXISTS cargo
-DROP TABLE IF EXISTS locatario
+-- DROP TABLE IF EXISTS autores
+-- DROP TABLE IF EXISTS autor_livro
+-- DROP TABLE IF EXISTS editora_livro
+-- DROP TABLE IF EXISTS editora
+-- DROP TABLE IF EXISTS curso
+-- DROP TABLE IF EXISTS dividas
+-- DROP TABLE IF EXISTS emprestimo
+-- DROP TABLE IF EXISTS locatario
+-- DROP TABLE IF EXISTS cargo
+-- DROP TABLE IF EXISTS arvore_categoria
+-- DROP TABLE IF EXISTS subcategoria
+-- DROP TABLE IF EXISTS categoria_subcategoria
+-- DROP TABLE IF EXISTS categoria
+-- DROP TABLE IF EXISTS categoria_livro
+-- DROP TABLE IF EXISTS livro
 
 -- =============================================================
 --                            LIVROS
@@ -21,7 +23,7 @@ CREATE TABLE livro(
 	isbn VARCHAR(50) UNIQUE,
 	titulo VARCHAR(100) NOT NULL,
 	qt_disponivel INTEGER,
-	disponivel INT CHECK (estado IN (0,1)) NOT NULL,
+	disponivel INT CHECK (disponivel IN (0,1)) NOT NULL,
 	edicao VARCHAR(100),
 	capa VARCHAR(300)
 );
@@ -116,14 +118,15 @@ CREATE TABLE emprestimo (
 
 
 CREATE TABLE solicita_reserva (
-	id_solicita_reserva SERIAL PRIMARY KEY,
-	id_livro INTEGER,
-	id_locatario INTEGER,
-	justificativa VARCHAR(500),
-	data_hora_reserva TIMESTAMP,
-	FOREIGN KEY (id_livro, id_locatario)
-	REFERENCES livro(id_livro), locatario(id_locatario)
-)
+    id_solicita_reserva SERIAL PRIMARY KEY,
+    id_livro INTEGER,
+    id_locatario INTEGER,
+    justificativa VARCHAR(500),
+    data_hora_reserva TIMESTAMP,
+    FOREIGN KEY (id_livro) REFERENCES livro(id_livro) ON DELETE CASCADE,
+    FOREIGN KEY (id_locatario) REFERENCES locatario(id_locatario) ON DELETE CASCADE
+);
+
 
 -- --------------------------DIVIDAS--------------------------
 
