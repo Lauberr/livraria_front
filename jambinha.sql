@@ -21,7 +21,7 @@ CREATE TABLE livro(
 	isbn VARCHAR(50) UNIQUE,
 	titulo VARCHAR(100) NOT NULL,
 	qt_disponivel INTEGER,
-	genero VARCHAR(100),
+	disponivel INT CHECK (estado IN (0,1)) NOT NULL,
 	edicao VARCHAR(100),
 	capa VARCHAR(300)
 );
@@ -65,17 +65,6 @@ CREATE TABLE subcategoria(
 	nome_subcat VARCHAR(100)
 );
 
--- CREATE TABLE arvore_categoria(
--- 	id_cat INTEGER REFERENCES categoria(id_cat),
--- 	id_subcat SERIAL,
--- 	PRIMARY KEY(id_cat, id_subcat)
--- );
-
-CREATE TABLE categoria_subcategoria(
-	id_cat INTEGER REFERENCES categoria(id_cat),
-	id_subcat INTEGER REFERENCES subcategoria(id_subcat),
-	PRIMARY KEY(id_cat, id_subcat)
-);
 
 CREATE TABLE categoria_livro(
 	id_cat INTEGER REFERENCES categoria(id_cat),
@@ -100,8 +89,8 @@ CREATE TABLE locatario(
 	registro_academico VARCHAR(7),
 	nome_locatario VARCHAR(100) NOT NULL,
 	data_nascimento DATE,
-	email VARCHAR(255),
-	telefone VARCHAR(30),
+	email_locatario VARCHAR(255),
+	telefone_locatario VARCHAR(30),
 	login VARCHAR(100),
 	senha VARCHAR(100),
 	id_cargo INTEGER,
@@ -125,6 +114,17 @@ CREATE TABLE emprestimo (
 	PRIMARY KEY (id_locatario, id_livro, data_hora_emprestimo)
 );
 
+
+CREATE TABLE solicita_reserva (
+	id_solicita_reserva SERIAL PRIMARY KEY,
+	id_livro INTEGER,
+	id_locatario INTEGER,
+	justificativa VARCHAR(500),
+	data_hora_reserva TIMESTAMP,
+	FOREIGN KEY (id_livro, id_locatario)
+	REFERENCES livro(id_livro), locatario(id_locatario)
+)
+
 -- --------------------------DIVIDAS--------------------------
 
 CREATE TABLE dividas(
@@ -134,7 +134,7 @@ CREATE TABLE dividas(
 	data_hora_emprestimo TIMESTAMP,
 	valor NUMERIC (15,2) NOT NULL,
 	data_hora_divida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	estado INT CHECK (estado IN (0g,1)) NOT NULL,
+	estado INT CHECK (estado IN (0,1)) NOT NULL,
 	FOREIGN KEY (id_livro, id_locatario, data_hora_emprestimo)
 	REFERENCES emprestimo(id_livro, id_locatario, data_hora_emprestimo) ON DELETE CASCADE
 );
