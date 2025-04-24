@@ -1,13 +1,41 @@
 
 import React from 'react';
-import LoginForm from './pages/loginBiblio';  
+import LoginBiblio from './pages/LoginBiblio';  
+import Login from './pages/Login'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate
+} from "react-router";
 
-const App = () => {
+export default function App() {
   return (
-    <div className="App">
-      <LoginForm />
-    </div>
+    <Router>
+      <Routes>
+        {/* Rota de login */}
+        <Route path="/" element={<Login />} />
+
+        {/* <Route path="/" element={<Layout showSidebar={true} />}> */}
+          <Route path="loginBiblio" element={<LoginBiblio />} />
+        {/* </Route> */}
+
+        {/* Rota para página 404 */}
+        {/* <Route path="*" element={<Pagina404 />} /> */}
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
+
+
+
+// const App = () => {
+//   return (
+//     <div className="App">
+//       <LoginForm />
+//     </div>
+//   );
+// }
+
+// export default App;
