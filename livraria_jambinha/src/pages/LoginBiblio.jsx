@@ -4,7 +4,9 @@ import '../css/loginBiblio.css';
 import logo from '../assets/utfprLogo.png';
 
 
-const LoginForm = () => {
+
+
+const LoginBiblio = () => {
   return (
     <div className="bodyLoginBiblio">
       <div className="container">
@@ -36,4 +38,4 @@ const LoginForm = () => {
   );
 }
 
-export default LoginForm;
+export default LoginBiblio;

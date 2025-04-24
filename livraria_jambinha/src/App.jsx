@@ -1,18 +1,41 @@
 
 import React from 'react';
-import LoginForm from './pages/loginBiblio';  
-import { Home } from './pages/Home';
-import { Sidebar } from './components/Sidebar';
-import { Layout } from './pages/Layout';
+import LoginBiblio from './pages/LoginBiblio';  
+import Login from './pages/Login'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate
+} from "react-router";
 
-const App = () => {
+export default function App() {
   return (
-    <div className="App">
-      <LoginForm />
-      {/* <Home/> */}
-      <Layout/>
-    </div>
+    <Router>
+      <Routes>
+        {/* Rota de login */}
+        <Route path="/" element={<Login />} />
+
+        {/* <Route path="/" element={<Layout showSidebar={true} />}> */}
+          <Route path="loginBiblio" element={<LoginBiblio />} />
+        {/* </Route> */}
+
+        {/* Rota para página 404 */}
+        {/* <Route path="*" element={<Pagina404 />} /> */}
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
+
+
+
+// const App = () => {
+//   return (
+//     <div className="App">
+//       <LoginForm />
+//     </div>
+//   );
+// }
+
+// export default App;
