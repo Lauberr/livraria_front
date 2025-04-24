@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
   }
-
+  
   .bodyLoginBiblio {
     margin: 0;
     padding: 0;
@@ -18,66 +18,75 @@
     justify-content: center; 
     align-items: center;     
   }
-
+  
   .button-box {
     background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem; /* 40px */
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1); /* 0 4px 20px */
     width: 30%;
     height: 60%;
   }
-
-.imagemDiv {
-    height: 50px;
+  
+  .imagemDiv {
+    height: 3.125rem; /* 50px */
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-  img {
-    height: 40px;
-    width: 80px;
   }
-
   
-
-  button {
-    width: 100%;
-    height: 55px;
-    padding: 10px;
+  img {
+    height: 2.5rem; /* 40px */
+    width: 5rem; /* 80px */
+  }
+  
+  .NavLink {
+    width: 23.8rem;
+    height: 3.4375rem; /* 55px */
+    padding: 0.625rem; /* 10px */
+    text-align: center;
     background-color: #FFBF00;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 0.25rem; /* 4px */
     cursor: pointer;
-    
   }
-  .btnBiblio{
+  
+  .NavLinkPreto {
+    width: 23.8rem;
+    height: 3.4375rem; /* 55px */
+    padding: 0.625rem; /* 10px */
+    text-align: center;
     background-color: black;
-    margin-top: 50px;
+    color: white;
+    border: none;
+    border-radius: 0.25rem; /* 4px */
+    cursor: pointer;
+    margin-top: 2rem;
   }
 
-button:hover {
+  .btnBiblio {
+    background-color: black;
+    margin-top: 3.125rem; /* 50px */
+    width: 23.8rem;
+  }
+  
+  button:hover {
     opacity: 0.8;
   }
-
-.botoes{
+  
+  .botoes {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-}
+    gap: 1.25rem; /* 20px */
+  }
   
-
   .titulo {
     text-align: center;
     display: block;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-top: 0.625rem; /* 10px */
+    margin-bottom: 0.3125rem; /* 5px */
     color: #4D4D4D;
-}
-
+  }
   
-
- 
