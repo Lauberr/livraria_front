@@ -1,6 +1,4 @@
 import React from 'react';
-import '../css/global.css';  
-import '../css/loading.css'
 import logo from '../assets/utfprLogo.png';
 
 
