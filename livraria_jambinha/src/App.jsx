@@ -1,41 +1,27 @@
-
 import React from 'react';
-import LoginBiblio from './pages/LoginBiblio';  
-import Login from './pages/Login'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate
-} from "react-router";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+// import LoginBiblio from './pages/LoginBiblio.jsx';  
+// import Login from './pages/Login.jsx';
+import Home from './pages/Home.jsx';
+import Layout from './pages/Layout.jsx'; // Importa o novo Layout
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        {/* Rota de login */}
-        <Route path="/" element={<Login />} />
+        {/* Página de login sem sidebar */}
+        {/* <Route path="/" element={<Login />} /> */}
+        {/* <Route path="loginBiblio" element={<LoginBiblio />} /> */}
 
+        {/* Rotas internas com sidebar */}
         {/* <Route path="/" element={<Layout showSidebar={true} />}> */}
-          <Route path="loginBiblio" element={<LoginBiblio />} />
-        {/* </Route> */}
+        <Route path="/" element={<Layout />} >
+          <Route path="home" element={<Home />} />
+        </Route>
 
-        {/* Rota para página 404 */}
+        {/* Página 404 (opcional) */}
         {/* <Route path="*" element={<Pagina404 />} /> */}
       </Routes>
     </Router>
   );
 }
-
-
-
-
-// const App = () => {
-//   return (
-//     <div className="App">
-//       <LoginForm />
-//     </div>
-//   );
-// }
-
-// export default App;
