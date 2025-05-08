@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from '../assets/utfprLogo.png';
+import logo from '../assets/Logo.png';
 
 const LoginBiblio = () => {
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-orange-500 via-orange-400 to-white font-sans">
+      <div className="flex items-center justify-center min-h-screen bg-[url('assets/background.jpeg')] font-sans">
         <div className="bg-white p-10 rounded-xl shadow-lg w-[30%] min-h-[60%] flex flex-col items-center">
           <div className="h-12 flex justify-center items-center mb-4">
             <img src={logo} alt="Logo UTFPR" className="h-10 w-20" />

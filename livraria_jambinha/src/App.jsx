@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-// import LoginBiblio from './pages/LoginBiblio.jsx';  
-// import Login from './pages/Login.jsx';
+import LoginBiblio from './pages/LoginBiblio.jsx';  
+import Login from './pages/Login.jsx';
 import Home from './pages/Home.jsx';
 import Layout from './pages/Layout.jsx'; // Importa o novo Layout
 
@@ -10,8 +10,8 @@ export default function App() {
     <Router>
       <Routes>
         {/* Página de login sem sidebar */}
-        {/* <Route path="/" element={<Login />} /> */}
-        {/* <Route path="loginBiblio" element={<LoginBiblio />} /> */}
+        {<Route path="login" element={<Login />} /> }
+        {<Route path="loginBiblio" element={<LoginBiblio />} /> }
 
         {/* Rotas internas com sidebar */}
         {/* <Route path="/" element={<Layout showSidebar={true} />}> */}
