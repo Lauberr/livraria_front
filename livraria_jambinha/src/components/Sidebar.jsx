@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 export default function Sidebar() {
   const linkClasses = ({ isActive }) =>
     `block p-4 pl-8 rounded hover:bg-yellow-400 flex  gap-2 text-gray-500 items-center justify-start ${
-      isActive ? "bg-orange-400 text-white" : "text-black"
+      isActive ? "text-gray-900 font-bold " : "text-black"
     }`;
 
   return (
