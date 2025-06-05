@@ -14,7 +14,7 @@ export default function Sidebar() {
       <NavLink to="/home" className={linkClasses}><Icon icon="lineicons:home-2" className="text-2xl"/>Início</NavLink>
       <NavLink to="/search" className={linkClasses}><Icon icon="heroicons-outline:search" className="text-xl"/> Pesquisar</NavLink>
       <NavLink to="/history" className={linkClasses}><Icon icon="fluent:history-28-filled" className="text-xl"/>Histórico</NavLink>
-      <NavLink to="/register" className={linkClasses}><Icon icon="bx:book-add" className="text-xl"/>Registrar Livro </NavLink>
+      <NavLink to="/registerBook" className={linkClasses}><Icon icon="bx:book-add" className="text-xl"/>Registrar Livro </NavLink>
       <NavLink to="/users" className={linkClasses}><Icon icon="mynaui:book-user" className="text-2xl"/>Locatários</NavLink>
     </aside>
   );

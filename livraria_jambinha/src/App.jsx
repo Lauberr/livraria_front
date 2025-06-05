@@ -4,6 +4,7 @@ import LoginBiblio from './pages/LoginBiblio.jsx';
 import Login from './pages/Login.jsx';
 import Home from './pages/Home.jsx';
 import Layout from './pages/Layout.jsx'; // Importa o novo Layout
+import RegisterBook from './pages/RegisterBook.jsx';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         {/* <Route path="/" element={<Layout showSidebar={true} />}> */}
         <Route path="/" element={<Layout />} >
           <Route path="home" element={<Home />} />
+          <Route path="registerBook" element={<RegisterBook />} />
         </Route>
 
         {/* Página 404 (opcional) */}
