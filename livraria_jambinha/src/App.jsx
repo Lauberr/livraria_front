@@ -6,6 +6,8 @@ import Login from './pages/Login.jsx';
 import Home from './pages/Home.jsx';
 import Layout from './pages/Layout.jsx'; // Importa o novo Layout
 import RegisterBook from './pages/RegisterBook.jsx';
+import FormAutor from './pages/FormAutor.jsx';
+// import History from './pages/History.jsx';
 
 export default function App() {
   const [msg, setMsg] = useState('');
@@ -18,22 +20,19 @@ export default function App() {
 
   return (
     <>
-    <p>{msg}</p>
+    {/* <p>{msg}</p> */}
     <Router>
       <Routes>
-        {/* Página de login sem sidebar */}
+        {/* Página de login sem sidebar
         {<Route path="login" element={<Login />} /> }
-        {<Route path="loginBiblio" element={<LoginBiblio />} /> }
+        {<Route path="loginBiblio" element={<LoginBiblio />} /> } */}
 
-        {/* Rotas internas com sidebar */}
-        {/* <Route path="/" element={<Layout showSidebar={true} />}> */}
         <Route path="/" element={<Layout />} >
           <Route path="home" element={<Home />} />
           <Route path="registerBook" element={<RegisterBook />} />
+          <Route path="formAutor" element={<FormAutor />} />
+          {/* <Route path="history" element={<History />} /> */}
         </Route>
-
-        {/* Página 404 (opcional) */}
-        {/* <Route path="*" element={<Pagina404 />} /> */}
       </Routes>
     </Router>
     </>

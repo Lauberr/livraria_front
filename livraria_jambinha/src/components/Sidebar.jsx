@@ -9,8 +9,9 @@ export default function Sidebar() {
     }`;
 
   return (
-    <aside className="font-sans bg-white w-60 p-4 flex flex-col gap-2">
+    <aside className="font-sans bg-white w-60 p-4 flex flex-col gap-2 rounded-l-xl">
       <div className="flex  justify-center"><img className="p-5 pb-14 w-3/4" src={Logo} alt="Logo UTFPR" /></div>
+      <NavLink to="/formAutor" className={linkClasses}><Icon icon="lineicons:home-2" className="text-2xl"/>Form Autor Teste</NavLink>
       <NavLink to="/home" className={linkClasses}><Icon icon="lineicons:home-2" className="text-2xl"/>Início</NavLink>
       <NavLink to="/search" className={linkClasses}><Icon icon="heroicons-outline:search" className="text-xl"/> Pesquisar</NavLink>
       <NavLink to="/history" className={linkClasses}><Icon icon="fluent:history-28-filled" className="text-xl"/>Histórico</NavLink>

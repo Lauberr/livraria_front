@@ -4,11 +4,16 @@ import Header from "../components/Header";
 
 export default function Layout() {
   return (
-    <div className="flex min-h-screen p-7 overflow-hidden bg-[url('assets/background.jpeg')] h-screen w-screen bg-cover bg-center">
+    <div className="flex h-screen w-screen overflow-hidden bg-[url('assets/background.jpeg')] bg-cover p-8">
       <Sidebar className="rounded" />
-      <div className="rounded-r-2xl flex-1 flex flex-col">
+      
+      {/* Área direita do layout */}
+      <div className="rounded-r-2xl flex-1 flex flex-col overflow-hidden">
+        {/* Header fixo no topo */}
         <Header />
-        <main className="w-full h-full">
+
+        {/* Conteúdo que pode rolar */}
+        <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
       </div>
