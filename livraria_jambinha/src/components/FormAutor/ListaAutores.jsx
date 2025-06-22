@@ -15,6 +15,8 @@ export default function ListaAutores() {
     }
   };
 
+// ===========================================================================
+
   const deletarAutor = async (id) => {
     if (!window.confirm('Deseja realmente deletar este autor?')) return;
 
@@ -35,6 +37,8 @@ export default function ListaAutores() {
       console.error('Erro ao deletar autor:', erro);
     }
   };
+
+// ===========================================================================
 
   const buscarAutorPorId = async () => {
     if (!buscaId) return alert('Informe o ID do autor.');
@@ -57,6 +61,8 @@ export default function ListaAutores() {
     carregarAutores();
   }, []);
 
+// ===========================================================================
+  
   return (
     <div className="p-6">
       <h2 className="text-xl font-bold mb-4">Lista de Autores</h2>

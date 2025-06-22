@@ -2,7 +2,7 @@ import { BookCard } from "../components/BookCard";
 
 export default function Home() {
     return (
-      <div className="p-8 grid grid-rows-5 bg-gray-300 w-full h-full">
+      <div className="p-8 grid grid-rows-5 bg-gray-300 w-full h-screen">
         <div>
           <h1 className="text-3xl font-bold">Bem-vindo à Jambinha!</h1>
           <p className="mt-4 text-lg">Explore novas leituras!</p>

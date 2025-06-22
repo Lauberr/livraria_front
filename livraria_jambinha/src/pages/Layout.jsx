@@ -7,12 +7,9 @@ export default function Layout() {
     <div className="flex h-screen w-screen overflow-hidden bg-[url('assets/background.jpeg')] bg-cover p-8">
       <Sidebar className="rounded" />
       
-      {/* Área direita do layout */}
       <div className="rounded-r-2xl flex-1 flex flex-col overflow-hidden">
-        {/* Header fixo no topo */}
         <Header />
 
-        {/* Conteúdo que pode rolar */}
         <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
