@@ -4,6 +4,8 @@ export default function ListaAutores() {
   const [autores, setAutores] = useState([]);
   const [buscaId, setBuscaId] = useState('');
   const [autorEncontrado, setAutorEncontrado] = useState(null);
+  const [editandoId, setEditandoId] = useState(null);
+  const [novoNome, setNovoNome] = useState('');
 
   const carregarAutores = async () => {
     try {
@@ -14,8 +16,6 @@ export default function ListaAutores() {
       console.error('Erro ao buscar autores:', erro);
     }
   };
-
-// ===========================================================================
 
   const deletarAutor = async (id) => {
     if (!window.confirm('Deseja realmente deletar este autor?')) return;
@@ -28,7 +28,7 @@ export default function ListaAutores() {
       if (resposta.status === 204) {
         alert('Autor deletado com sucesso!');
         carregarAutores();
-        setAutorEncontrado(null); // limpa se foi deletado
+        setAutorEncontrado(null);
       } else {
         const erro = await resposta.json();
         alert('Erro ao deletar: ' + erro.detalhe);
@@ -37,8 +37,6 @@ export default function ListaAutores() {
       console.error('Erro ao deletar autor:', erro);
     }
   };
-
-// ===========================================================================
 
   const buscarAutorPorId = async () => {
     if (!buscaId) return alert('Informe o ID do autor.');
@@ -57,17 +55,46 @@ export default function ListaAutores() {
     }
   };
 
+  const iniciarEdicao = (autor) => {
+    setEditandoId(autor.id_autor);
+    setNovoNome(autor.nome_autor);
+  };
+
+  const cancelarEdicao = () => {
+    setEditandoId(null);
+    setNovoNome('');
+  };
+
+  const salvarEdicao = async (id) => {
+    try {
+      const resposta = await fetch(`http://localhost:3000/api/autores/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome_autor: novoNome }),
+      });
+
+      if (resposta.ok) {
+        alert('Autor atualizado com sucesso!');
+        setEditandoId(null);
+        setNovoNome('');
+        carregarAutores();
+      } else {
+        const erro = await resposta.json();
+        alert('Erro: ' + erro.detalhe);
+      }
+    } catch (erro) {
+      console.error('Erro ao atualizar autor:', erro);
+    }
+  };
+
   useEffect(() => {
     carregarAutores();
   }, []);
 
-// ===========================================================================
-  
   return (
     <div className="p-6">
       <h2 className="text-xl font-bold mb-4">Lista de Autores</h2>
 
-      {/* Campo de busca por ID */}
       <div className="mb-6">
         <input
           type="number"
@@ -84,35 +111,63 @@ export default function ListaAutores() {
         </button>
       </div>
 
-      {/* Resultado da busca */}
       {autorEncontrado && (
-        <div className="mb-6 p-4 bg-green-100 border border-green-400 rounded">
+        <div className="mb-6 p-4 bg-gray-300 border border-gray-300 rounded">
           <strong>Autor encontrado:</strong> {autorEncontrado.nome_autor} (ID: {autorEncontrado.id_autor})
         </div>
       )}
 
-      {/* Lista geral */}
       {autores.length === 0 ? (
         <p>Nenhum autor cadastrado.</p>
       ) : (
         <ul className="space-y-2">
           {autores.map((autor) => (
-            <li key={autor.id_autor} className="bg-white p-4 rounded shadow flex justify-between items-center">
-              <span>{autor.nome_autor}</span>
-              <div className="space-x-2">
-                <button
-                  className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded"
-                  onClick={() => alert('Funcionalidade de edição em construção')}
-                >
-                  Editar
-                </button>
-                <button
-                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
-                  onClick={() => deletarAutor(autor.id_autor)}
-                >
-                  Deletar
-                </button>
-              </div>
+            <li
+              key={autor.id_autor}
+              className="bg-white p-4 rounded shadow flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2"
+            >
+              {editandoId === autor.id_autor ? (
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full">
+                  <input
+                    type="text"
+                    value={novoNome}
+                    onChange={(e) => setNovoNome(e.target.value)}
+                    className="border px-2 py-1 rounded w-full sm:w-auto"
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      className="bg-yellow-400 text-white px-3 py-1 rounded"
+                      onClick={() => salvarEdicao(autor.id_autor)}
+                    >
+                      Salvar
+                    </button>
+                    <button
+                      className="bg-gray-400 text-white px-3 py-1 rounded"
+                      onClick={cancelarEdicao}
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <span>{autor.nome_autor}</span>
+                  <div className="space-x-2">
+                    <button
+                      className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded"
+                      onClick={() => iniciarEdicao(autor)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                      onClick={() => deletarAutor(autor.id_autor)}
+                    >
+                      Deletar
+                    </button>
+                  </div>
+                </>
+              )}
             </li>
           ))}
         </ul>
