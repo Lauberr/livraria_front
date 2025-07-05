@@ -10,6 +10,7 @@ import FormAutor from './pages/FormAutor.jsx';
 import { Search } from './pages/Search.jsx';
 import History  from './pages/History.jsx';
 import Users from './pages/Users.jsx';
+import BookView from './pages/BookView.jsx';
 
 export default function App() {
   const [msg, setMsg] = useState('');
@@ -36,6 +37,7 @@ export default function App() {
             <Route path="registerBook" element={<RegisterBook />} />
             <Route path="formAutor" element={<FormAutor />} />
             <Route path="users" element={<Users />} />
+            <Route path="bookView" element={<BookView />} />
 
           </Route>
         </Routes>
