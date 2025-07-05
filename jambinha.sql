@@ -30,9 +30,9 @@ CREATE TABLE livro(
 
 -- --------------------------AUTORES---------------------------
 
-CREATE TABLE autores(
-	id_autor SERIAL PRIMARY KEY,
-	nome_autor VARCHAR(100)
+CREATE TABLE autores (
+  id_autor SERIAL PRIMARY KEY,
+  nome_autor VARCHAR(100) UNIQUE NOT NULL
 );
 
 CREATE TABLE autor_livro(
@@ -43,11 +43,12 @@ CREATE TABLE autor_livro(
 	
 -- --------------------------EDITORA---------------------------
 
-CREATE TABLE editora(
-	id_editora SERIAL PRIMARY KEY,
-	nome_editora VARCHAR(100),
-	data_publicacao TIMESTAMP
+CREATE TABLE editora (
+  id_editora SERIAL PRIMARY KEY,
+  nome_editora VARCHAR(100) UNIQUE NOT NULL,
+  data_publicacao DATE
 );
+
 
 CREATE TABLE editora_livro(
 	id_editora INTEGER REFERENCES editora(id_editora),
@@ -57,15 +58,16 @@ CREATE TABLE editora_livro(
 
 -- -------------------------CATEGORIA--------------------------
 
-CREATE TABLE categoria(
-	id_cat SERIAL PRIMARY KEY,
-	nome_cat VARCHAR(100)
+CREATE TABLE categoria (
+  id_cat SERIAL PRIMARY KEY,
+  nome_cat VARCHAR(100) UNIQUE NOT NULL
 );
 
-CREATE TABLE subcategoria(
-	id_subcat SERIAL PRIMARY KEY,
-	nome_subcat VARCHAR(100)
+CREATE TABLE subcategoria (
+  id_subcat SERIAL PRIMARY KEY,
+  nome_subcat VARCHAR(100) UNIQUE NOT NULL
 );
+
 
 
 CREATE TABLE categoria_livro(
@@ -81,7 +83,7 @@ CREATE TABLE categoria_livro(
 -- =============================================================
 
 CREATE TABLE cargo(
-	id_cargo INTEGER UNIQUE PRIMARY KEY,
+	id_cargo INTEGER SERIAL PRIMARY KEY,
 	descricao VARCHAR(100),
 	qt_livro INTEGER
 );
@@ -93,8 +95,6 @@ CREATE TABLE locatario(
 	data_nascimento DATE,
 	email_locatario VARCHAR(255),
 	telefone_locatario VARCHAR(30),
-	login VARCHAR(100),
-	senha VARCHAR(100),
 	id_cargo INTEGER,
 	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo)
 );
