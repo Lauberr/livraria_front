@@ -83,7 +83,7 @@ CREATE TABLE categoria_livro(
 -- =============================================================
 
 CREATE TABLE cargo(
-	id_cargo INTEGER SERIAL PRIMARY KEY,
+	id_cargo SERIAL PRIMARY KEY,
 	descricao VARCHAR(100),
 	qt_livro INTEGER
 );

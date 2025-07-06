@@ -1,8 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import LoginBiblio from './pages/LoginBiblio.jsx';
-import Login from './pages/Login.jsx';
+// import LoginBiblio from './pages/LoginBiblio.jsx';
+// import Login from './pages/Login.jsx';
 import Home from './pages/Home.jsx';
 import Layout from './pages/Layout.jsx';
 import RegisterBook from './pages/RegisterBook.jsx';
@@ -35,7 +35,7 @@ export default function App() {
             <Route path="search" element={<Search />} />
             <Route path="history" element={<History />} />
             <Route path="registerBook" element={<RegisterBook />} />
-            <Route path="formAutor" element={<FormAutor />} />
+            {/* <Route path="formAutor" element={<FormAutor />} /> */}
             <Route path="users" element={<Users />} />
             <Route path="bookView" element={<BookView />} />
 
