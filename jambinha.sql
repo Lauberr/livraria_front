@@ -15,7 +15,7 @@
 -- DROP TABLE IF EXISTS livro
 
 -- =============================================================
---                            LIVROS
+--                            LIVROS FEITO
 -- =============================================================
 
 CREATE TABLE livro(
@@ -28,7 +28,7 @@ CREATE TABLE livro(
 	capa VARCHAR(300)
 );
 
--- --------------------------AUTORES---------------------------
+-- --------------------------AUTORES FEITO---------------------------
 
 CREATE TABLE autores (
   id_autor SERIAL PRIMARY KEY,
@@ -41,7 +41,7 @@ CREATE TABLE autor_livro(
 	PRIMARY KEY (id_livro, id_autor)
 );
 	
--- --------------------------EDITORA---------------------------
+-- --------------------------EDITORA FEITO---------------------------
 
 CREATE TABLE editora (
   id_editora SERIAL PRIMARY KEY,
@@ -56,7 +56,7 @@ CREATE TABLE editora_livro(
 	PRIMARY KEY(id_livro, id_editora)
 );
 
--- -------------------------CATEGORIA--------------------------
+-- -------------------------CATEGORIA FEITO--------------------------
 
 CREATE TABLE categoria (
   id_cat SERIAL PRIMARY KEY,
@@ -79,7 +79,7 @@ CREATE TABLE categoria_livro(
 
 
 -- =============================================================
---                          LOCATARIO
+--                          LOCATARIO FEITO
 -- =============================================================
 
 CREATE TABLE cargo(
@@ -99,7 +99,7 @@ CREATE TABLE locatario(
 	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo)
 );
 
--- ---------------------------CURSO----------------------------
+-- ---------------------------CURSO FEITO----------------------------
 
 CREATE TABLE curso(
 	id_curso SERIAL PRIMARY KEY,
@@ -117,28 +117,29 @@ CREATE TABLE emprestimo (
 );
 
 
-CREATE TABLE solicita_reserva (
-    id_solicita_reserva SERIAL PRIMARY KEY,
-    id_livro INTEGER,
-    id_locatario INTEGER,
-    justificativa VARCHAR(500),
-    data_hora_reserva TIMESTAMP,
-    FOREIGN KEY (id_livro) REFERENCES livro(id_livro) ON DELETE CASCADE,
-    FOREIGN KEY (id_locatario) REFERENCES locatario(id_locatario) ON DELETE CASCADE
-);
+-- CREATE TABLE solicita_reserva (
+--     id_solicita_reserva SERIAL PRIMARY KEY,
+--     id_livro INTEGER,
+--     id_locatario INTEGER,
+--     justificativa VARCHAR(500),
+--     data_hora_reserva TIMESTAMP,
+--     FOREIGN KEY (id_livro) REFERENCES livro(id_livro) ON DELETE CASCADE,
+--     FOREIGN KEY (id_locatario) REFERENCES locatario(id_locatario) ON DELETE CASCADE
+-- );
 
 
 -- --------------------------DIVIDAS--------------------------
 
 CREATE TABLE dividas(
-	id_divida SERIAL PRIMARY KEY,
-	id_livro INTEGER,
-	id_locatario INTEGER,
-	data_hora_emprestimo TIMESTAMP,
-	valor NUMERIC (15,2) NOT NULL,
-	data_hora_divida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	estado INT CHECK (estado IN (0,1)) NOT NULL,
-	FOREIGN KEY (id_livro, id_locatario, data_hora_emprestimo)
-	REFERENCES emprestimo(id_livro, id_locatario, data_hora_emprestimo) ON DELETE CASCADE
+  id_divida SERIAL PRIMARY KEY,
+  id_livro INTEGER,
+  id_locatario INTEGER,
+  data_hora_emprestimo TIMESTAMP,
+  valor NUMERIC(15,2) NOT NULL,
+  data_hora_divida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  estado INT CHECK (estado IN (0,1)) NOT NULL,
+  FOREIGN KEY (id_locatario, id_livro, data_hora_emprestimo)
+    REFERENCES emprestimo(id_locatario, id_livro, data_hora_emprestimo) ON DELETE CASCADE
 );
+
 
