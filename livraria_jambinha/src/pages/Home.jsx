@@ -1,42 +1,37 @@
+import { useEffect, useState } from "react";
 import { BookCard } from "../components/BookCard";
 
 export default function Home() {
-    return (
-      <div className="p-8 grid grid-rows-5 bg-gray-300 w-full h-screen">
-        <div>
-          <h1 className="text-3xl font-bold">Bem-vindo à Jambinha!</h1>
-          <p className="mt-4 text-lg">Explore novas leituras!</p>
-        </div>
+  const [livros, setLivros] = useState([]);
 
-        <div className="h-full flex">
-          <div className="flex flex-wrap gap-10">
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-          </div>
-        </div>
+  useEffect(() => {
+    async function fetchLivros() {
+      try {
+        const response = await fetch("http://localhost:3000/livros"); // ajuste a URL conforme sua API
+        const data = await response.json();
+        setLivros(data);
+      } catch (error) {
+        console.error("Erro ao buscar livros:", error);
+      }
+    }
 
-        {/* <div className="h-full">
-          <h2 className="text-3xl font-bold"></h2>
-        </div> */}
-        
-        {/* <div className="h-full flex ">
-          <div className="flex flex-wrap gap-10">
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-            <BookCard/>
-          </div>
-        </div> */}
+    fetchLivros();
+  }, []);
+
+  return (
+    <div className="p-8 grid grid-rows-5 bg-gray-200 w-full h-screen">
+      <div>
+        <h1 className="text-3xl font-bold">Bem-vindo à Jambinha!</h1>
+        <p className="mt-4 text-lg">Explore novas leituras!</p>
       </div>
-    );
-  }
-  
+
+      <div className="h-full flex">
+        <div className="flex flex-wrap gap-10">
+          {livros.map((livro) => (
+            <BookCard key={livro.id_livro} livro={livro} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
