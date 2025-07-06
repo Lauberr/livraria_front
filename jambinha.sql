@@ -106,7 +106,7 @@ CREATE TABLE curso(
 	nome_curso VARCHAR(50) NOT NULL
 );
 
--- -------------------------EMPRESTIMO-------------------------
+-- -------------------------EMPRESTIMO FEITO-------------------------
 
 CREATE TABLE emprestimo (
 	id_locatario INTEGER REFERENCES locatario(id_locatario),
@@ -128,7 +128,7 @@ CREATE TABLE emprestimo (
 -- );
 
 
--- --------------------------DIVIDAS--------------------------
+-- --------------------------DIVIDAS FEITO--------------------------
 
 CREATE TABLE dividas(
   id_divida SERIAL PRIMARY KEY,
