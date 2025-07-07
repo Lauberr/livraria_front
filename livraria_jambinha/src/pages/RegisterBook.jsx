@@ -52,7 +52,7 @@ export default function RegisterBook() {
 
 
     return (
-        <div className="p-17 w-full h-screen bg-gray-200">
+        <div className="p-17 w-full h-screen bg-gray-100">
             <div className="bg-gray-100 p-10 rounded-xl">
                 <h2 className="text-2xl font-semibold mb-6">Registrar Livro</h2>
 

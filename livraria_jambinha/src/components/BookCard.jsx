@@ -2,7 +2,7 @@ export function BookCard({ livro }) {
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden w-64">
       <img
-        src={livro.capa}
+        src={`http://localhost:3000${livro.capa}`}
         alt={`Capa do livro ${livro.titulo}`}
         className="w-full h-80 object-cover p-5"
       />

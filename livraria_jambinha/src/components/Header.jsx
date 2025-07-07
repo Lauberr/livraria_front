@@ -13,7 +13,7 @@ export default function Header() {
     }
 
     return (
-      <header className="bg-gradient-to-b from-white via-gray-100 to-gray-200 p-6 flex justify-between items-center h-1/10">
+      <header className="bg-gradient-to-b from-white via-gray-100 to-gray-100 p-6 flex justify-between items-center h-1/10">
         <div className="flex">
           <select
             value={filtro}
