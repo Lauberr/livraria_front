@@ -6,7 +6,7 @@ const statusClasses = {
   indisponível: "bg-red-700 text-white",
 };
 
-export default function BookCard({ livro }) {
+export default function HistoryCard({ livro }) {
   return (
     <div className="grid grid-cols-12 bg-white px-6 py-4 border-t border-gray-200 items-center rounded">
       {/* Título + capa */}

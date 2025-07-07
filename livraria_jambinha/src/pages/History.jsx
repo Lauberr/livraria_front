@@ -1,70 +1,37 @@
-import React from "react";
-import BookCard from "../components/History/BookCard";
-
-const mockHistorico = [
-  {
-    id: 1,
-    capa: "https://m.media-amazon.com/images/I/71UypkUjStL.jpg",
-    titulo: "Don’t Make Me Think",
-    autor: "Steve Krug",
-    ano: "2000",
-    edicao: "Segunda Edição",
-    categoria1: "Ciência da Computação",
-    categoria2: "UX Design",
-    status: "disponível",
-    tipoUsuario: null,
-  },
-  {
-    id: 2,
-    capa: "https://m.media-amazon.com/images/I/71HMyqG6MRL.jpg",
-    titulo: "The Design of Everyday Things",
-    autor: "Don Norman",
-    ano: "1988",
-    edicao: "",
-    categoria1: "Ciência da Computação",
-    categoria2: "UX Design",
-    status: "reservado",
-    tipoUsuario: "Aluno",
-  },
-  {
-    id: 3,
-    capa: "https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg",
-    titulo: "Rich Dad Poor Dad",
-    autor: "Robert T. Kiyosaki",
-    ano: "1997",
-    edicao: "",
-    categoria1: "Gestão Financeira",
-    categoria2: "",
-    status: "disponível",
-    tipoUsuario: null,
-  },
-  {
-    id: 4,
-    capa: "https://m.media-amazon.com/images/I/71UypkUjStL.jpg",
-    titulo: "Don’t Make Me Think",
-    autor: "Steve Krug",
-    ano: "2000",
-    edicao: "Segunda Edição",
-    categoria1: "Ciência da Computação",
-    categoria2: "UX Design",
-    status: "indisponível",
-    tipoUsuario: null,
-  },
-  {
-    id: 5,
-    capa: "https://m.media-amazon.com/images/I/71HMyqG6MRL.jpg",
-    titulo: "The Design of Everyday Things",
-    autor: "Don Norman",
-    ano: "1988",
-    edicao: "",
-    categoria1: "Ciência da Computação",
-    categoria2: "UX Design",
-    status: "reservado",
-    tipoUsuario: "Professor",
-  },
-];
+import React, { useEffect, useState } from "react";
+import HistoryCard  from "../components/History/HistoryCard";
 
 export default function History() {
+  const [historico, setHistorico] = useState([]);
+
+  useEffect(() => {
+    async function carregarHistorico() {
+      try {
+        const resposta = await fetch("http://localhost:3000/emprestimos"); // Sua API
+        const dados = await resposta.json();
+
+        const formatado = dados.map((item) => ({
+          id: `${item.id_locatario}-${item.id_livro}-${item.data_hora_emprestimo}`,
+          capa: "https://m.media-amazon.com/images/I/71UypkUjStL.jpg", // Trocar futuramente por item.capa
+          titulo: item.titulo || "Livro Exemplo",
+          autor: item.autor || "Autor Exemplo",
+          ano: new Date(item.data_hora_emprestimo).getFullYear(),
+          edicao: item.edicao || "",
+          categoria1: item.categoria1 || "Categoria Exemplo",
+          categoria2: item.categoria2 || "",
+          status: "reservado", // Ex: alterar baseado em data_devolucao
+          tipoUsuario: item.tipo_usuario || "Aluno",
+        }));
+
+        setHistorico(formatado);
+      } catch (erro) {
+        console.error("Erro ao carregar histórico:", erro);
+      }
+    }
+
+    carregarHistorico();
+  }, []);
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen space-y-4">
       {/* Cabeçalho */}
@@ -83,9 +50,9 @@ export default function History() {
         <div className="col-span-3 text-right">Status</div>
       </div>
 
-      {/* Lista */}
-      {mockHistorico.map((livro) => (
-        <BookCard key={livro.id} livro={livro} />
+      {/* Lista de livros */}
+      {historico.map((livro) => (
+        <HistoryCard key={livro.id} livro={livro} />
       ))}
     </div>
   );

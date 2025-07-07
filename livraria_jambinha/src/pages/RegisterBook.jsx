@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ImageUpload from "../components/RegisterBook/ImageUpload";
 
 export default function RegisterBook() {
     const [formData, setFormData] = useState({
@@ -9,25 +10,56 @@ export default function RegisterBook() {
         editora: '',
         categoria: '',
         subcategoria: '',
-        unidades: 1
+        unidades: 1,
+        capa: null,
     });
+
+    const [mensagem, setMensagem] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Livro registrado:', formData);
-    };
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = new FormData();
+    form.append('titulo', formData.titulo);
+    form.append('isbn', formData.isbn);
+    form.append('qt_disponivel', formData.unidades);
+    form.append('disponivel', '1'); // ou '0' se não estiver disponível
+    form.append('edicao', formData.edicao || '');
+
+    if (formData.capa) {
+        form.append('capa', formData.capa); // aqui vai a imagem real
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/livros', {
+            method: 'POST',
+            body: form
+        });
+
+        if (!res.ok) throw new Error(`Erro: ${res.statusText}`);
+        const result = await res.json();
+        console.log('Livro registrado com sucesso:', result);
+    } catch (err) {
+        console.error('Erro ao registrar livro:', err);
+    }
+};
+
+
 
     return (
-        <div className="p-17  w-full h-full bg-gray-200">
-            <div className="bg-gray-100 p-8 rounded-lg max-w-6xl mx-auto mt-10">
+        <div className="p-17 w-full h-screen bg-gray-200">
+            <div className="bg-gray-100 p-10 rounded-xl">
                 <h2 className="text-2xl font-semibold mb-6">Registrar Livro</h2>
-                <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="flex flex-col space-y-4">
+
+                {mensagem && <div className="mb-4 text-sm text-blue-600">{mensagem}</div>}
+
+                <form onSubmit={handleSubmit} className="grid grid-cols-5 gap-6">
+                    <div className="flex flex-col space-y-7 col-span-3">
                         <input
                             type="text"
                             name="titulo"
@@ -54,7 +86,6 @@ export default function RegisterBook() {
                                 value={formData.isbn}
                                 onChange={handleChange}
                                 className="border rounded px-4 py-2"
-                                required
                             />
                             <input
                                 type="text"
@@ -105,25 +136,22 @@ export default function RegisterBook() {
                                 min="1"
                                 value={formData.unidades}
                                 onChange={handleChange}
-                                className="border rounded px-4 py-2 w-24"
+                                className="border rounded px- py-2 w-24"
                             />
                         </div>
                         <button
                             type="submit"
-                            className="bg-black text-white py-2 px-6 rounded hover:bg-gray-800"
+                            className="bg-black text-white py-3 px-6 rounded hover:bg-gray-800"
                         >
                             Registrar
                         </button>
                     </div>
 
-                    {/* Coluna da Imagem */}
-                    <div className="bg-gray-300 flex items-center justify-center rounded">
-                        <div className="text-center">
-                            <div className="w-28 h-28 bg-yellow-100 border rounded flex items-center justify-center mx-auto">
-                                <img src="https://via.placeholder.com/60" alt="Imagem" className="object-cover" />
-                            </div>
-                            <p className="text-gray-600 mt-2">Capa do Livro</p>
-                        </div>
+                    {/* Imagem */}
+                    <div className="bg-gray-300 flex flex-wrap items-center justify-center rounded col-span-2">
+                        <ImageUpload onImageSelect={(file) =>
+                            setFormData((prev) => ({ ...prev, capa: file }))
+                        } />
                     </div>
                 </form>
             </div>
