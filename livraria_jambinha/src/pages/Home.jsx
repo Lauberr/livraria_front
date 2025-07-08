@@ -19,13 +19,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="p-8 bg-gray-100 w-full h-sreen">
+    <div className="p-8 bg-gray-100 w-full h-screen">
       <div>
         <h1 className="text-3xl font-bold">Bem-vindo à Jambinha!</h1>
-        <p className="my-4 text-lg">Explore novas leituras!</p>
+        <p className="mt-4 text-lg">Explore novas leituras!</p>
       </div>
 
-      <div className="h-full flex">
+      <div className="flex">
         <div className="flex flex-wrap gap-10">
           {livros.map((livro) => (
             <BookCard key={livro.id_livro} livro={livro} />

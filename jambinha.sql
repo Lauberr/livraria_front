@@ -96,6 +96,7 @@ CREATE TABLE locatario(
 	email_locatario VARCHAR(255),
 	telefone_locatario VARCHAR(30),
 	id_cargo INTEGER,
+	status BOOLEAN DEFAULT true,
 	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo)
 );
 

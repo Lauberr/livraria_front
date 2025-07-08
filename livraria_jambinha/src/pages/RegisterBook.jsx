@@ -53,7 +53,7 @@ export default function RegisterBook() {
 
     return (
         <div className="p-17 w-full h-screen bg-gray-100">
-            <div className="bg-gray-100 p-10 rounded-xl">
+            <div className="bg-white p-10 rounded-xl shadow-xl">
                 <h2 className="text-2xl font-semibold mb-6">Registrar Livro</h2>
 
                 {mensagem && <div className="mb-4 text-sm text-blue-600">{mensagem}</div>}
@@ -148,7 +148,7 @@ export default function RegisterBook() {
                     </div>
 
                     {/* Imagem */}
-                    <div className="bg-gray-300 flex flex-wrap items-center justify-center rounded col-span-2">
+                    <div className="bg-gray-200 flex flex-wrap items-center justify-center rounded col-span-2">
                         <ImageUpload onImageSelect={(file) =>
                             setFormData((prev) => ({ ...prev, capa: file }))
                         } />

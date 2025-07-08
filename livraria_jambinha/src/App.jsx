@@ -30,14 +30,14 @@ export default function App() {
         {<Route path="loginBiblio" element={<LoginBiblio />} /> } */}
 
           <Route path="/" element={<Layout />} >
-            <Route index element={<FormAutor />} />
+            <Route index element={<Home />} />
             <Route path="home" element={<Home />} />
             <Route path="search" element={<Search />} />
             <Route path="history" element={<History />} />
             <Route path="registerBook" element={<RegisterBook />} />
             {/* <Route path="formAutor" element={<FormAutor />} /> */}
             <Route path="users" element={<Users />} />
-            <Route path="bookView" element={<BookView />} />
+            <Route path="/livro/:id" element={<BookView />} />
 
           </Route>
         </Routes>

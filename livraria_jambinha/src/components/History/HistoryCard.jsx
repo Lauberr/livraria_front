@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 const statusClasses = {
   disponível: "bg-green-500 text-white",
@@ -41,9 +43,11 @@ export default function HistoryCard({ livro }) {
             </span>
           )}
         </div>
-        <button className="border border-red-400 text-red-400 hover:bg-red-100 px-3 py-1 rounded">
-          Ver
-        </button>
+        <Link to={`/livro/${livro.id_livro}`}>
+          <button className="border border-red-400 text-red-400 hover:bg-red-100 px-3 py-1 rounded">
+            Ver
+          </button>
+        </Link>
       </div>
     </div>
   );
