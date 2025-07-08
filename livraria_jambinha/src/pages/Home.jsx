@@ -19,7 +19,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="p-8 bg-gray-100 w-full h-screen">
+    <div className="p-8 bg-gray-100 w-full min-h-screen h-auto">
       <div>
         <h1 className="text-3xl font-bold">Bem-vindo à Jambinha!</h1>
         <p className="mt-4 text-lg">Explore novas leituras!</p>
