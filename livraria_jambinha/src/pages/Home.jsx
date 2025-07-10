@@ -7,7 +7,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchLivros() {
       try {
-        const response = await fetch("http://localhost:3000/livros"); // ajuste a URL conforme sua API
+        const response = await fetch("http://localhost:3000/livros"); 
         const data = await response.json();
         setLivros(data);
       } catch (error) {
