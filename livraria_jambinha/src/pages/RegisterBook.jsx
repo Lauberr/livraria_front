@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ImageUpload from "../components/RegisterBook/ImageUpload";
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterBook() {
     const [formData, setFormData] = useState({
@@ -15,48 +16,69 @@ export default function RegisterBook() {
     });
 
     const [mensagem, setMensagem] = useState('');
+    const [livroCriado, setLivroCriado] = useState(null);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-   const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    const form = new FormData();
-    form.append('titulo', formData.titulo);
-    form.append('isbn', formData.isbn);
-    form.append('qt_disponivel', formData.unidades);
-    form.append('disponivel', '1'); // ou '0' se não estiver disponível
-    form.append('edicao', formData.edicao || '');
+        const form = new FormData();
+        form.append('titulo', formData.titulo);
+        form.append('isbn', formData.isbn);
+        form.append('qt_disponivel', formData.unidades);
+        form.append('disponivel', '1');
+        form.append('edicao', formData.edicao || '');
 
-    if (formData.capa) {
-        form.append('capa', formData.capa); // aqui vai a imagem real
-    }
+        if (formData.capa) {
+            form.append('capa', formData.capa);
+        }
 
-    try {
-        const res = await fetch('http://localhost:3000/livros', {
-            method: 'POST',
-            body: form
-        });
+        try {
+            const res = await fetch('http://localhost:3000/livros', {
+                method: 'POST',
+                body: form
+            });
 
-        if (!res.ok) throw new Error(`Erro: ${res.statusText}`);
-        const result = await res.json();
-        console.log('Livro registrado com sucesso:', result);
-    } catch (err) {
-        console.error('Erro ao registrar livro:', err);
-    }
-};
+            if (!res.ok) throw new Error(`Erro: ${res.statusText}`);
+            const result = await res.json();
+            console.log('Livro registrado com sucesso:', result);
+            setMensagem('Livro cadastrado com sucesso!');
+            setLivroCriado(result);
+
+        } catch (err) {
+            console.error('Erro ao registrar livro:', err);
+        }
+    };
+
+    const navigate = useNavigate();
+
 
 
 
     return (
-        <div className="p-17 w-full h-screen bg-gray-100">
+        <div className="p-17 w-full h-full bg-gray-100">
             <div className="bg-white p-10 rounded-xl shadow-xl">
                 <h2 className="text-2xl font-semibold mb-6">Registrar Livro</h2>
 
                 {mensagem && <div className="mb-4 text-sm text-blue-600">{mensagem}</div>}
+
+                {livroCriado && (
+                    <div className="mb-6 p-4 bg-green-100 text-green-800 rounded">
+                        Livro criado com sucesso!
+                        <button
+                            onClick={() => navigate(`/livro/${livroCriado.id_livro}`)}
+                            className="ml-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                        >
+                            Ver Livro
+                        </button>
+                    </div>
+                )}
+
 
                 <form onSubmit={handleSubmit} className="grid grid-cols-5 gap-6">
                     <div className="flex flex-col space-y-7 col-span-3">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function ListaAutores() {
+export default function ListaAutores({ autorAdicionado }) {
   const [autores, setAutores] = useState([]);
   const [buscaId, setBuscaId] = useState('');
   const [autorEncontrado, setAutorEncontrado] = useState(null);
@@ -90,6 +90,12 @@ export default function ListaAutores() {
   useEffect(() => {
     carregarAutores();
   }, []);
+
+  useEffect(() => {
+    if (autorAdicionado) {
+      setAutores((prev) => [autorAdicionado, ...prev]);
+    }
+  }, [autorAdicionado]);
 
   return (
     <div className="p-6">

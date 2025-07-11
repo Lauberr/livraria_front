@@ -35,7 +35,7 @@ export default function App() {
             <Route path="search" element={<Search />} />
             <Route path="history" element={<History />} />
             <Route path="registerBook" element={<RegisterBook />} />
-            {/* <Route path="formAutor" element={<FormAutor />} /> */}
+            <Route path="formAutor" element={<FormAutor />} />
             <Route path="users" element={<Users />} />
             <Route path="/livro/:id" element={<BookView />} />
 

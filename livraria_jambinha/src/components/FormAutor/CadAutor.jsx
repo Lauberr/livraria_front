@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function CadAutor() {
+export default function CadAutor({ onAutorCadastrado }) {
   const [nomeAutor, setNomeAutor] = useState('');
 
   const handleSubmit = async (e) => {
@@ -8,15 +8,15 @@ export default function CadAutor() {
 
     const resposta = await fetch('http://localhost:3000/api/autores', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome_autor: nomeAutor })
     });
 
     if (resposta.ok) {
+      const novoAutor = await resposta.json();
       alert('Autor cadastrado com sucesso!');
       setNomeAutor('');
+      onAutorCadastrado(novoAutor); // Envia o novo autor para o componente pai
     } else {
       const erro = await resposta.json();
       alert('Erro: ' + erro.detalhe);
