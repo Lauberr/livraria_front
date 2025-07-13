@@ -8,7 +8,7 @@ export default function BookDetailsCard({ detalhes }) {
         <h3 className="font-semibold text-gray-700 mb-3">Detalhes do livro</h3>
         <div className="text-sm text-gray-500">
           <div className="mb-1"><span className="font-medium text-gray-700">Edição:</span> {detalhes.edicao}</div>
-          <div className="mb-1"><span className="font-medium text-gray-700">Data da Publicação:</span> {detalhes.dataPublicacao}</div>
+          {/* <div className="mb-1"><span className="font-medium text-gray-700">Data da Publicação:</span> {detalhes.dataPublicacao}</div> */}
           <div className="mb-1"><span className="font-medium text-gray-700">Editora:</span> {detalhes.editora}</div>
           <div className="mt-4 font-medium text-gray-700">ID Numbers</div>
           <div className="mb-1">ID do Livro: {detalhes.idLivro}</div>

@@ -33,7 +33,7 @@ export default function BookView() {
           <h1 className="text-2xl font-semibold text-gray-800">{livro.titulo}</h1>
           <p className="text-sm text-gray-600 mt-1">ISBN: {livro.isbn}</p>
           <p className="text-sm text-gray-400 mt-1">Edição: {livro.edicao}</p>
-          <p className="text-sm text-gray-400 mt-1">Disponíveis: {livro.qt_disponivel}</p>
+          {/* <p className="text-sm text-gray-400 mt-1">Disponíveis: {livro.qt_disponivel}</p> */}
 
           <div className="mt-4">
             <p className="text-sm font-semibold text-gray-600">Status</p>
@@ -45,7 +45,7 @@ export default function BookView() {
           <div className="mt-6 text-sm text-gray-600">
             <p><strong>Autores:</strong> {livro.autor?.join(', ')}</p>
             <p><strong>Editora:</strong> {livro.editora?.nome_editora || 'Não cadastrada'}</p>
-            <p><strong>Data de Publicação:</strong> {livro.editora?.data_publicacao?.split('T')[0] || 'Não definida'}</p>
+            {/* <p><strong>Data de Publicação:</strong> {livro.editora?.data_publicacao?.split('T')[0] || 'Não definida'}</p> */}
             <p><strong>Categoria:</strong> {livro.categoria?.join(', ')}</p>
           </div>
 
@@ -56,7 +56,7 @@ export default function BookView() {
 
           <BookDetailsCard detalhes={{
             edicao: livro.edicao,
-            dataPublicacao: livro.editora?.data_publicacao,
+            // dataPublicacao: livro.editora?.data_publicacao,
             editora: livro.editora?.nome_editora,
             idLivro: livro.id_livro,
             isbn: livro.isbn,

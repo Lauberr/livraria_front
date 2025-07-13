@@ -16,7 +16,7 @@ export default function CadAutor({ onAutorCadastrado }) {
       const novoAutor = await resposta.json();
       alert('Autor cadastrado com sucesso!');
       setNomeAutor('');
-      onAutorCadastrado(novoAutor); // Envia o novo autor para o componente pai
+      onAutorCadastrado(novoAutor);
     } else {
       const erro = await resposta.json();
       alert('Erro: ' + erro.detalhe);

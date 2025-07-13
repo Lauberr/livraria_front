@@ -44,7 +44,6 @@ export default function Users() {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen space-y-4">
-      {/* Cabeçalho */}
       <div className="flex justify-between items-center mb-6">
         <select
           onChange={(e) => setFiltro({ ...filtro, tipo: e.target.value })}

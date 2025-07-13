@@ -7,12 +7,12 @@ export default function History() {
   useEffect(() => {
     async function carregarHistorico() {
       try {
-        const resposta = await fetch("http://localhost:3000/emprestimos"); // Sua API
+        const resposta = await fetch("http://localhost:3000/emprestimos"); 
         const dados = await resposta.json();
 
         const formatado = dados.map((item) => ({
           id: `${item.id_locatario}-${item.id_livro}-${item.data_hora_emprestimo}`,
-          capa: "https://m.media-amazon.com/images/I/71UypkUjStL.jpg", // Trocar futuramente por item.capa
+          capa: "/imagens/DomCasmurro",
           titulo: item.titulo || "Livro Exemplo",
           autor: item.autor || "Autor Exemplo",
           ano: new Date(item.data_hora_emprestimo).getFullYear(),
@@ -34,7 +34,6 @@ export default function History() {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen space-y-4">
-      {/* Cabeçalho */}
       <div className="flex justify-between items-center mb-6">
         <button className="bg-white px-4 py-2 rounded shadow border text-gray-700 hover:bg-gray-50">
           Filtrar <span className="ml-1">▾</span>
@@ -43,14 +42,12 @@ export default function History() {
 
       <h2 className="text-lg font-semibold mb-4">Histórico</h2>
 
-      {/* Cabeçalho da tabela */}
       <div className="grid grid-cols-12 bg-white rounded-t-md px-6 py-3 font-medium text-gray-600">
         <div className="col-span-5">Título</div>
         <div className="col-span-4">Categoria</div>
         <div className="col-span-3 text-right">Status</div>
       </div>
 
-      {/* Lista de livros */}
       {historico.map((livro) => (
         <HistoryCard key={livro.id} livro={livro} />
       ))}

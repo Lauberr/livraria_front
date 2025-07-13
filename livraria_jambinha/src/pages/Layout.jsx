@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-[url('assets/background.jpeg')] bg-cover p-8">
       <Sidebar className="rounded" />
-      
+
       <div className="rounded-r-2xl flex-1 flex flex-col overflow-hidden">
         <Header />
 
