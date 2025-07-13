@@ -69,7 +69,7 @@ export default function BookView() {
         </div>
       </div>
 
-      {mostrarModal && <ReservaModal livroId={livro.id_livro} onClose={() => setMostrarModal(false)} />}
+      {mostrarModal && <ReservaModal livroISBN={livro.isbn} onClose={() => setMostrarModal(false)} />}
     </div>
   );
 }

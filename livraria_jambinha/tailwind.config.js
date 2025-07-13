@@ -16,6 +16,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
+       backgroundOpacity: ['active'],
     },
   },
   plugins: [
