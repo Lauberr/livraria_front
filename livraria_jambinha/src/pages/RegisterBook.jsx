@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import ImageUpload from "../components/RegisterBook/ImageUpload";
 import { useNavigate } from 'react-router-dom';
 
@@ -17,6 +18,41 @@ export default function RegisterBook() {
 
     const [mensagem, setMensagem] = useState('');
     const [livroCriado, setLivroCriado] = useState(null);
+    const [categorias, setCategorias] = useState([]);
+    const [subcategorias, setSubcategorias] = useState([]);
+    const [autores, setAutores] = useState([]);
+    const [editoras, setEditoras] = useState([]);
+
+
+    useEffect(() => {
+        async function fetchDados() {
+            try {
+                const [resCat, resSub, resAut, resEdit] = await Promise.all([
+                    fetch('http://localhost:3000/api/categoria'),
+                    fetch('http://localhost:3000/api/subcategorias'),
+                    fetch('http://localhost:3000/api/autores'),
+                    fetch('http://localhost:3000/api/editoras')
+                ]);
+
+                const [dataCat, dataSub, dataAut, dataEdit] = await Promise.all([
+                    resCat.json(),
+                    resSub.json(),
+                    resAut.json(),
+                    resEdit.json()
+                ]);
+
+                setCategorias(dataCat);
+                setSubcategorias(dataSub);
+                setAutores(dataAut);
+                setEditoras(dataEdit);
+            } catch (err) {
+                console.error('Erro ao carregar dados:', err);
+            }
+        }
+
+        fetchDados();
+    }, []);
+
 
 
     const handleChange = (e) => {
@@ -26,6 +62,7 @@ export default function RegisterBook() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const autoresArray = formData.autores.split(',').map(a => a.trim());
 
         const form = new FormData();
         form.append('titulo', formData.titulo);
@@ -33,6 +70,11 @@ export default function RegisterBook() {
         form.append('qt_disponivel', formData.unidades);
         form.append('disponivel', '1');
         form.append('edicao', formData.edicao || '');
+        form.append('autores', JSON.stringify(autoresArray));
+        form.append('editora', formData.editora);
+        form.append('categoria', formData.categoria);
+        form.append('subcategoria', formData.subcategoria);
+
 
         if (formData.capa) {
             form.append('capa', formData.capa);
@@ -133,22 +175,30 @@ export default function RegisterBook() {
                                 onChange={handleChange}
                                 className="border rounded px-4 py-2"
                             >
-                                <option value="">Categoria</option>
-                                <option value="Romance">Romance</option>
-                                <option value="Ficção">Ficção</option>
-                                <option value="Técnico">Técnico</option>
+                                <option value="">Selecione uma categoria</option>
+                                {categorias.map(cat => (
+                                    <option key={cat.id_cat} value={cat.id_cat}>
+                                        {cat.nome_cat}
+                                    </option>
+                                ))}
                             </select>
+
                             <select
                                 name="subcategoria"
-                                value={formData.subcategoria}
+                                value={formData.subcat}
                                 onChange={handleChange}
                                 className="border rounded px-4 py-2"
                             >
-                                <option value="">Subcategoria</option>
-                                <option value="Clássico">Clássico</option>
-                                <option value="Moderno">Moderno</option>
-                                <option value="Acadêmico">Acadêmico</option>
+                                <option value="">Selecione uma subcategoria</option>
+                                {subcategorias.map(sub => (
+                                    <option key={sub.id_subcat} value={sub.id_subcat}>
+                                        {sub.nome_subcat}
+                                    </option>
+                                ))}
                             </select>
+
+
+
                         </div>
                         <div className="flex items-center gap-4">
                             <label className="text-sm font-medium">Nº unidades</label>

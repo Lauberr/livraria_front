@@ -14,16 +14,16 @@ export default function LocatarioCard({ locatario, aoEditar, aoDesativar }) {
 
       <div className="col-span-3">
         <span className="text-sm font-semibold flex items-center mt-1 gap-1">
-          <Icon icon="mynaui:user" className="text-xl" />   {locatario.tipo || 'Não Definido'}
+          <Icon icon="heroicons:user-circle" className="text-xl" />   {locatario.tipo || 'Não Definido'}
         </span>
         <div className="text-sm text-gray-500">
           Nascido em {new Date(locatario.data_nascimento).toLocaleDateString()}
         </div>
       </div>
 
-      <div className="col-span-3">
+      <div className="col-span-3 pl-15">
         <div>{locatario.email_locatario}</div>
-        <div className="text-sm text-gray-500">{locatario.telefone_locatario}</div>
+        <div className="text-sm text-gray-500">Telefone: {locatario.telefone_locatario}</div>
       </div>
 
       <div className="col-span-3 flex flex-col items-end">
